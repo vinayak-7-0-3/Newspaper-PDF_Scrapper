@@ -1,0 +1,37 @@
+{
+    "name": "News Paper Scrapper",
+    "description": "News Paper Direct Link Scrapper Bot For Telegram",
+    "keywords": [
+      "telegram",
+      "heroku",
+      "api"
+    ],
+    "success_url": "https://telegram.dog/heroku_pro_manager_bot",
+    "website": "https://github.com/vinayak-7-0-3/heroku-tg",
+    "repository": "https://github.com/vinayak-7-0-3/heroku-tg",
+    "env": {
+      "TG_BOT_TOKEN": {
+        "description": "Your bot token, as a string.",
+        "value": ""
+      },
+      "APP_ID": {
+        "description": "Get this value from https://my.telegram.org",
+        "value": ""
+      },
+      "API_HASH": {
+        "description": "Get this value from https://my.telegram.org",
+        "value": ""
+      }
+    },
+    "addons": [
+    ],
+    "buildpacks": [{
+      "url": "heroku/python"
+    }],
+    "formation": {
+      "worker": {
+        "quantity": 1,
+        "size": "free"
+      }
+    }
+  }
