@@ -1,2 +1,4 @@
 tgcrypto
 pyrogram
+beautifulsoup4
+urllib3

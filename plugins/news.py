@@ -1,5 +1,9 @@
+from helpers.sorted_news import eng_name_list, eng_url_list
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from helpers.check_list import check_list
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+
+
 
 @Client.on_message(filters.command("news"))
 async def news(client, message):
@@ -78,6 +82,33 @@ async def news(client, message):
         ),
         reply_to_message_id=message.message_id
     )
+
+@Client.on_callback_query(filters.regex("english"))
+async def english(c: Client, cb: CallbackQuery):
+    i = 0
+    while i < len(eng_name_list):
+        await cb.message.edit_text(
+            chat_id = cb.message.chat.id,
+            text=f"<b>Choose Your News Paper</b>",
+            message_id=cb.message.message_id,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            f"{eng_name_list[i]}",
+                            callback_data=f"{eng_url_list[i]}"
+                        ),
+                        InlineKeyboardButton(
+                            f"{eng_name_list[i+1]}",
+                            callback_data=f"{eng_url_list[i+1]}"
+                        )
+                    ]
+                ]
+            )
+        )
+        i += 1
+
+
 
 
 
