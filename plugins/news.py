@@ -85,6 +85,7 @@ async def news(client, message):
 
 @Client.on_callback_query(filters.regex("english"))
 async def english(c: Client, cb: CallbackQuery):
+    print(cb.data)
     i = 0
     while i < len(eng_name_list):
         await cb.message.edit_text(
