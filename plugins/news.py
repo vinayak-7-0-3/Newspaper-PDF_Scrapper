@@ -108,34 +108,13 @@ async def english(c: Client, cb: CallbackQuery):
                 )
             ])
         i += 2
-    
 
-
-
-
-    i = 0
-    while i < len(eng_name_list):
         await c.edit_message_text(
             chat_id=cb.message.chat.id,
             text=f"<b>Choose Your News Paper</b>",
             message_id=cb.message.message_id,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            f"{eng_name_list[i]}",
-                            callback_data=f"{eng_url_list[i]}"
-                        ),
-                        InlineKeyboardButton(
-                            f"{eng_name_list[i+1]}",
-                            callback_data=f"{eng_url_list[i+1]}"
-                        )
-                    ]
-                ]
-            )
+            reply_markup=InlineKeyboardMarkup(inline_keyboard)
         )
-        i += 1
-
 
 
 
