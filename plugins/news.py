@@ -85,7 +85,34 @@ async def news(client, message):
 
 @Client.on_callback_query(filters.regex("english"))
 async def english(c: Client, cb: CallbackQuery):
-    print(cb.data)
+    inline_keyboard = []
+
+    i = 0
+    while i < len(eng_name_list):
+        if eng_name_list[i] and eng_name_list[i+1]:
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    eng_name_list[i],
+                    callback_data=eng_url_list[i]
+                ),
+                InlineKeyboardButton(
+                    eng_name_list[i+1],
+                    callback_data=eng_url_list[i+1]
+                )
+            ])
+        elif eng_name_list[i+1] is None:
+            inline_keyboard.append([
+                InlineKeyboardButton(
+                    eng_name_list[i],
+                    callback_data=eng_url_list[i]
+                )
+            ])
+        i += 2
+    
+
+
+
+
     i = 0
     while i < len(eng_name_list):
         await c.edit_message_text(
