@@ -89,7 +89,7 @@ async def english(c: Client, cb: CallbackQuery):
 
     i = 0
     while i < len(eng_name_list):
-        if eng_name_list[i] and eng_name_list[i+1]:
+        if eng_name_list[i] and eng_name_list[i+1] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
                     eng_name_list[i],
@@ -100,7 +100,7 @@ async def english(c: Client, cb: CallbackQuery):
                     callback_data=eng_url_list[i+1]
                 )
             ])
-        elif eng_name_list[i+1] is None:
+        elif eng_name_list[i+1] is None and eng_name_list[i] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
                     eng_name_list[i],
