@@ -88,8 +88,8 @@ async def english(c: Client, cb: CallbackQuery):
     print(cb.data)
     i = 0
     while i < len(eng_name_list):
-        await cb.message.edit_text(
-            chat_id = cb.message.chat.id,
+        await c.edit_message_text(
+            chat_id=cb.message.chat.id,
             text=f"<b>Choose Your News Paper</b>",
             message_id=cb.message.message_id,
             reply_markup=InlineKeyboardMarkup(
