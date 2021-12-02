@@ -107,7 +107,7 @@ async def english(c: Client, cb: CallbackQuery):
                     callback_data=eng_url_list[i]
                 )
             ])
-        i += 1
+        i += 2
     
 
 
