@@ -88,7 +88,7 @@ async def english(c: Client, cb: CallbackQuery):
     inline_keyboard = []
 
     i = 0
-    while i < len(eng_name_list) + 1:
+    while i < len(eng_name_list):
         if eng_name_list[i] and eng_name_list[i+1]:
             inline_keyboard.append([
                 InlineKeyboardButton(
@@ -107,7 +107,7 @@ async def english(c: Client, cb: CallbackQuery):
                     callback_data=eng_url_list[i]
                 )
             ])
-        i += 2
+        i += 1
     
 
 

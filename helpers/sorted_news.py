@@ -59,5 +59,6 @@ eng_name_list = [
     "Millennium Post",
     "Deccan Herald",
     "Lokmat Times",
-    "Kashmir Times"
+    "Kashmir Times",
+    None
 ]
