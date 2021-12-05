@@ -119,18 +119,18 @@ async def choose_news(c: Client, cb: CallbackQuery):
                 )
             ])
         i += 2
-        inline_keyboard.append([
-            InlineKeyboardButton(
-                "Close",
-                callback_data="close"
-            )
-        ])
-        await c.edit_message_text(
-            chat_id=cb.message.chat.id,
-            text=f"<b>Choose Your News Paper</b>",
-            message_id=cb.message.message_id,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard)
+    inline_keyboard.append([
+        InlineKeyboardButton(
+            "Close",
+            callback_data="close"
         )
+    ])
+    await c.edit_message_text(
+        chat_id=cb.message.chat.id,
+        text=f"<b>Choose Your News Paper</b>",
+        message_id=cb.message.message_id,
+        reply_markup=InlineKeyboardMarkup(inline_keyboard)
+    )
 
 @Client.on_callback_query(~filters.regex(news_lang_regex))
 async def get_news(c: Client, cb: CallbackQuery):
