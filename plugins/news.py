@@ -85,8 +85,8 @@ async def news(client, message):
 @Client.on_callback_query(filters.regex("^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"))
 async def english(c: Client, cb: CallbackQuery):
     inline_keyboard = []
-    cb_news_lang = f"{cb.data}" + "_list"
-    cb_news_name = f"{cb.data}" + "_name"
+    cb_news_lang = f"{cb.data}_list"
+    cb_news_name = f"{cb.data}_name"
     i = 0
     while i < len(cb_news_lang):
         if cb_news_lang[i] and cb_news_lang[i+1] is not None:
