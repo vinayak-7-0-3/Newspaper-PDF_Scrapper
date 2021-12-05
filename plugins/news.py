@@ -1,3 +1,4 @@
+import sys
 from helpers.sorted_news import english_list, english_name
 from pyrogram import Client, filters
 from helpers.check_list import check_list
@@ -84,6 +85,9 @@ async def news(client, message):
 
 @Client.on_callback_query(filters.regex("^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"))
 async def english(c: Client, cb: CallbackQuery):
+
+    news_name = getattr(sys.modules[__name__], cb.data + "_name")
+    print(news_name)
     inline_keyboard = []
     i = 0
     while i < len(f"{cb.data}_name"):
