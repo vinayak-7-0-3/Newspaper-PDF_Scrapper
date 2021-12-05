@@ -3,7 +3,6 @@ from pyrogram import Client, filters
 from helpers.check_list import check_list
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-lang = ["english", "hindi", "telugu", "marathi", "bengali", "gujarati", "punjabi", "tamil", "malayalam", "kannada", "urdu", "odiya", "assamese"]
 
 @Client.on_message(filters.command("news"))
 async def news(client, message):
@@ -83,7 +82,7 @@ async def news(client, message):
         reply_to_message_id=message.message_id
     )
 
-@Client.on_callback_query(filters.regex(lang))
+@Client.on_callback_query(filters.regex("^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"))
 async def english(c: Client, cb: CallbackQuery):
     inline_keyboard = []
     cb_news_lang = f"{cb.data}" + "_list"
