@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 
 news_lang_regex = "^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"
 
-@Client.on_message(filters.command(["news", "shell@indian_newspapers_bot"]))
+@Client.on_message(filters.command(["news", "news@indian_newspapers_bot"]))
 async def news(client, message):
     await client.send_message(
         message.chat.id,
