@@ -1,5 +1,5 @@
 import sys
-from helpers.sorted_news import english_list, english_name
+from helpers.sorted_news import *
 from pyrogram import Client, filters
 from helpers.check_list import check_list
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -87,26 +87,27 @@ async def news(client, message):
 async def english(c: Client, cb: CallbackQuery):
 
     news_name = getattr(sys.modules[__name__], cb.data + "_name")
-    print(news_name)
+    news_list = getattr(sys.modules[__name__], cb.data + "_list")
+    
     inline_keyboard = []
     i = 0
-    while i < len(f"{cb.data}_name"):
-        if f"{cb.data}_name"[i] and f"{cb.data}_name"[i+1] is not None:
+    while i < len(news_name):
+        if news_name[i] and news_name[i+1] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    f"{cb.data}_name"[i],
-                    callback_data=f"{cb.data}_list"[i]
+                    news_name[i],
+                    callback_data=news_list[i]
                 ),
                 InlineKeyboardButton(
-                    f"{cb.data}_name"[i+1],
-                    callback_data=f"{cb.data}_list"[i+1]
+                    news_name[i+1],
+                    callback_data=news_list[i+1]
                 )
             ])
-        elif f"{cb.data}_name"[i+1] is None and f"{cb.data}_name"[i] is not None:
+        elif news_name[i+1] is None and news_name[i] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    f"{cb.data}_name"[i],
-                    callback_data=f"{cb.data}_list"[i]
+                    news_name[i],
+                    callback_data=news_list[i]
                 )
             ])
         i += 2
