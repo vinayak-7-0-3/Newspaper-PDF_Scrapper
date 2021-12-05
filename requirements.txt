@@ -2,3 +2,4 @@ tgcrypto
 pyrogram
 beautifulsoup4
 urllib3
+lxml
