@@ -2,8 +2,10 @@ import sys
 from helpers.sorted_news import *
 from pyrogram import Client, filters
 from helpers.check_list import check_list
+from helpers.get_link import get_news_direct_link
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
+news_lang_regex = "^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"
 
 @Client.on_message(filters.command("news"))
 async def news(client, message):
@@ -83,12 +85,12 @@ async def news(client, message):
         reply_to_message_id=message.message_id
     )
 
-@Client.on_callback_query(filters.regex("^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"))
-async def english(c: Client, cb: CallbackQuery):
+@Client.on_callback_query(filters.regex(news_lang_regex))
+async def choose_news(c: Client, cb: CallbackQuery):
 
     news_name = getattr(sys.modules[__name__], cb.data + "_name")
     news_list = getattr(sys.modules[__name__], cb.data + "_list")
-    
+
     inline_keyboard = []
     i = 0
     while i < len(news_name):
@@ -118,6 +120,15 @@ async def english(c: Client, cb: CallbackQuery):
             message_id=cb.message.message_id,
             reply_markup=InlineKeyboardMarkup(inline_keyboard)
         )
+
+@Client.on_callback_query(~filters.regex(news_lang_regex))
+async def get_news(c: Client, cb: CallbackQuery):
+    news_link = "https://www.fresherwave.com/" + cb.data + "/"
+
+    name, url = await get_news_direct_link(news_link)
+    print(name, url)
+
+
 
 
 
