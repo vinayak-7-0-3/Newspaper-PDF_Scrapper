@@ -1,9 +1,9 @@
-from helpers.sorted_news import eng_name_list, eng_url_list
+from helpers.sorted_news import *
 from pyrogram import Client, filters
 from helpers.check_list import check_list
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-
+lang = ["english", "hindi", "telugu", "marathi", "bengali", "gujarati", "punjabi", "tamil", "malayalam", "kannada", "urdu", "odiya", "assamese"]
 
 @Client.on_message(filters.command("news"))
 async def news(client, message):
@@ -83,28 +83,29 @@ async def news(client, message):
         reply_to_message_id=message.message_id
     )
 
-@Client.on_callback_query(filters.regex("english"))
+@Client.on_callback_query(filters.regex(lang))
 async def english(c: Client, cb: CallbackQuery):
     inline_keyboard = []
-
+    cb_news_lang = f"{cb.data}" + "_list"
+    cb_news_name = f"{cb.data}" + "_name"
     i = 0
-    while i < len(eng_name_list):
-        if eng_name_list[i] and eng_name_list[i+1] is not None:
+    while i < len(cb_news_lang):
+        if cb_news_lang[i] and cb_news_lang[i+1] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    eng_name_list[i],
-                    callback_data=eng_url_list[i]
+                    cb_news_lang[i],
+                    callback_data=cb_news_name[i]
                 ),
                 InlineKeyboardButton(
-                    eng_name_list[i+1],
-                    callback_data=eng_url_list[i+1]
+                    cb_news_lang[i+1],
+                    callback_data=cb_news_name[i+1]
                 )
             ])
-        elif eng_name_list[i+1] is None and eng_name_list[i] is not None:
+        elif cb_news_lang[i+1] is None and cb_news_lang[i] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    eng_name_list[i],
-                    callback_data=eng_url_list[i]
+                    cb_news_lang[i],
+                    callback_data=cb_news_name[i]
                 )
             ])
         i += 2

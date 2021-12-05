@@ -1,4 +1,4 @@
-eng_url_list = [
+english_list = [
     "the-hindu-analysis-pdf",
     "business-line-newspaper",
     "the-economic-times-epaper",
@@ -30,7 +30,7 @@ eng_url_list = [
     "kashmir-times-epaper-pdf"
 ]
 
-eng_name_list = [
+english_name = [
     "The Hindu Analysis",
     "Business Line",
     "The Economic Times",
