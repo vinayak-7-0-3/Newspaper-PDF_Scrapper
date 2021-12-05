@@ -132,7 +132,7 @@ async def choose_news(c: Client, cb: CallbackQuery):
         reply_markup=InlineKeyboardMarkup(inline_keyboard)
     )
 
-@Client.on_callback_query(~filters.regex(news_lang_regex))
+@Client.on_callback_query(~filters.regex(news_lang_regex) & ~filters.regex("close"))
 async def get_news(c: Client, cb: CallbackQuery):
     news_link = "https://www.fresherwave.com/" + cb.data + "/"
 
