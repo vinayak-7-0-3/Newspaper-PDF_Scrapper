@@ -99,7 +99,7 @@ async def choose_news(c: Client, cb: CallbackQuery):
 
     inline_keyboard = []
     i = 0
-    while i < len(news_name):
+    while i < len(news_name) - 1:
         if news_name[i] and news_name[i+1] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
