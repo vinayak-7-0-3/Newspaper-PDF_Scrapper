@@ -1,4 +1,4 @@
-from helpers.sorted_news import *
+from helpers.sorted_news import english_list, english_name
 from pyrogram import Client, filters
 from helpers.check_list import check_list
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -85,26 +85,24 @@ async def news(client, message):
 @Client.on_callback_query(filters.regex("^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"))
 async def english(c: Client, cb: CallbackQuery):
     inline_keyboard = []
-    cb_news_lang = f"{cb.data}_list"
-    cb_news_name = f"{cb.data}_name"
     i = 0
-    while i < len(cb_news_lang):
-        if cb_news_lang[i] and cb_news_lang[i+1] is not None:
+    while i < len(f"{cb.data}_name"):
+        if f"{cb.data}_name"[i] and f"{cb.data}_name"[i+1] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    cb_news_lang[i],
-                    callback_data=cb_news_name[i]
+                    f"{cb.data}_name"[i],
+                    callback_data=f"{cb.data}_list"[i]
                 ),
                 InlineKeyboardButton(
-                    cb_news_lang[i+1],
-                    callback_data=cb_news_name[i+1]
+                    f"{cb.data}_name"[i+1],
+                    callback_data=f"{cb.data}_list"[i+1]
                 )
             ])
-        elif cb_news_lang[i+1] is None and cb_news_lang[i] is not None:
+        elif f"{cb.data}_name"[i+1] is None and f"{cb.data}_name"[i] is not None:
             inline_keyboard.append([
                 InlineKeyboardButton(
-                    cb_news_lang[i],
-                    callback_data=cb_news_name[i]
+                    f"{cb.data}_name"[i],
+                    callback_data=f"{cb.data}_list"[i]
                 )
             ])
         i += 2
