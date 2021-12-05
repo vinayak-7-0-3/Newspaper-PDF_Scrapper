@@ -12,7 +12,7 @@ async def get_news_direct_link(url):
         'Connection': 'keep-alive'}
 
     open_link = Request(url, headers=header)
-    html_code = urlopen(fresherwave_link,timeout=10).read().decode('utf-8')
+    html_code = urlopen(open_link,timeout=10).read().decode('utf-8')
     soup = BeautifulSoup(html_code, 'lxml')
 
     date = soup.find(class_='ninja_column_0 ninja_clmn_nm_date footable-first-visible').text
