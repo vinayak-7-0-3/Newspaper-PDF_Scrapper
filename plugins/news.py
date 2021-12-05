@@ -126,7 +126,22 @@ async def get_news(c: Client, cb: CallbackQuery):
     news_link = "https://www.fresherwave.com/" + cb.data + "/"
 
     name, url = await get_news_direct_link(news_link)
-    print(name, url)
+    inline_keyboard = []
+    for i in range(len(name)):
+        inline_keyboard.append([
+            InlineKeyboardButton(
+                name[i],
+                url=url[i]
+            )
+        ])
+    await c.edit_message_text(
+        chat_id=cb.message.chat.id,
+        text=f"<b>Choose The Date</b>",
+        message_id=cb.message.message_id,
+        reply_markup=InlineKeyboardMarkup(inline_keyboard)
+    )
+    
+
 
 
 
