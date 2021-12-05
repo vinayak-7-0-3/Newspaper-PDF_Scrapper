@@ -7,7 +7,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 
 news_lang_regex = "^(english|hindi|telugu|marathi|bengali|gujarati|punjabi|tamil|malayalam|kannada|urdu|odiya|assamese)$"
 
-@Client.on_message(filters.command("news"))
+@Client.on_message(filters.command(["news", "shell@indian_newspapers_bot"]))
 async def news(client, message):
     await client.send_message(
         message.chat.id,
@@ -79,6 +79,12 @@ async def news(client, message):
                         "Assamese",
                         callback_data="assamese"
                     )
+                ],
+                [
+                    InlineKeyboardButton(
+                        "Close",
+                        callback_data="close"
+                    )
                 ]
             ]
         ),
@@ -113,7 +119,12 @@ async def choose_news(c: Client, cb: CallbackQuery):
                 )
             ])
         i += 2
-
+        inline_keyboard.append([
+            InlineKeyboardButton(
+                "Close",
+                callback_data="close"
+            )
+        ])
         await c.edit_message_text(
             chat_id=cb.message.chat.id,
             text=f"<b>Choose Your News Paper</b>",
@@ -134,6 +145,12 @@ async def get_news(c: Client, cb: CallbackQuery):
                 url=url[i]
             )
         ])
+    inline_keyboard.append([
+        InlineKeyboardButton(
+            "Close",
+            callback_data="close"
+        )
+    ])
     await c.edit_message_text(
         chat_id=cb.message.chat.id,
         text=f"<b>Choose The Date</b>",
@@ -141,6 +158,20 @@ async def get_news(c: Client, cb: CallbackQuery):
         reply_markup=InlineKeyboardMarkup(inline_keyboard)
     )
     
+@Client.on_callback_query(filters.regex("close"))
+async def cancel(c: Client, cb: CallbackQuery):
+    await c.delete_messages(
+        chat_id=cb.message.chat.id,
+        message_ids=cb.message.message_id
+    )
+    try:
+        await c.delete_messages(
+            chat_id=cb.message.chat.id,
+            message_ids=cb.message.reply_to_message.message_id
+        )
+    except:
+        pass
+
 
 
 
